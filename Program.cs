@@ -22,8 +22,38 @@
             Console.WriteLine();
             Console.WriteLine();
 
-              
+
+
+            Random random = new Random();
+            string[] names = ["Svensson", "Eriksson", "Karlsson", "Hermundsson", "Qvist",
+                "Olofsson", "Håkansson", "Brwon", "Stark", "Rogers",
+                "Banner", "Furry", "Jonas", "Lukas", "Amjad",
+                "Taen", "Micke", "Wallenberg", "Trump", "Putin"
+                ];
+            List<Citizan> citizans = new List<Citizan>();
+
+
+            for (int i = 0; i < 20; i++)
+            {
+                string name = names[random.Next(names.Length)];
+                Citizan citizan = new Citizan(name);
+                citizans.Add(citizan);
             }
+
+            foreach (Citizan C in citizans)
+            {
+                //Console.WriteLine("C");
+
+                //Console.WriteLine(C.Name);
+                //foreach ( Item item in C.Inventory)
+                //{
+                //    Console.WriteLine(" - " + item.Name);
+                //}
+            }
+
+
+
+        }
         }
     }
 

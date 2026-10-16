@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Gotham
 {
-    internal class Character
+    internal class Characters
     {
         public char Icon { get; set; }
         public string Name { get; set; }
