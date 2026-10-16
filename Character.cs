@@ -58,7 +58,7 @@ namespace Gotham
         }
     }
 
-    public class move
+    public class Move
     {
         public int Bredd = 50;
         public int Höjd = 30;
@@ -69,7 +69,21 @@ namespace Gotham
 
         //private static Random random = new Random();
 
-        private
+        //private
+
+        public static readonly (int X, int Y)[] Directions =
+        {
+            (-1,-1), // Vänster ner
+            (-1, 1), // Vänster upp
+            (1,-1), // Häger ner
+            (1,1), // Höger Upp
+
+            (-1, 0),  // vänster
+            (1, 0),   // höger
+            (0, -1),  // upp
+            (0, 1),   // ner
+            
+        };
     }
 }
 
