@@ -18,6 +18,10 @@
                 Console.WriteLine(@"        \XX\       \X/    \XXX/    \X/       /XX/");
                 Console.WriteLine(@"            ""\       ""     \X/      ""       /""");
 
+
+            Console.WriteLine();
+            Console.WriteLine();
+
               
             }
         }
