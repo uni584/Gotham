@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Gotham
+﻿namespace Gotham
 {
-    internal class Police
+    internal class Police : Person
     {
+        public Police(int x, int y)
+        {
+            Icon = 'P';
+            X = x;
+            Y = y;
+        }
     }
 }
