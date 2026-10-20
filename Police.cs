@@ -2,11 +2,12 @@
 {
     internal class Police : Person
     {
-        public Police(int x, int y)
+        public Police(int x, int y) : base(x, y) 
         {
             Icon = 'P';
-            X = x;
-            Y = y;
-        }
+            
+
+        } 
+        //restmetod
     }
 }
