@@ -6,9 +6,11 @@ namespace Gotham
 {
     internal class Things
     {
-        //public string Money { get; set; }
-        //public string Phone { get; set; }
-        //public string Keys { get; set; }
-        //public string Watch { get; set; }
+        public string Name { get; set; }
+
+        public Things(string name)
+        {
+            Name = name;
+        }
     }
 }
