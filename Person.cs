@@ -10,31 +10,37 @@
 
         private static Random random = new Random();
 
-        private static readonly (int X, int Y)[] Directions =
-        {
-            (-1,-1), // Vänster ner
-            (-1, 1), // Vänster upp
-            (1,-1), // Häger ner
-            (1,1), // Höger Upp
-
-            (-1, 0),  // vänster
-            (1, 0),   // höger
-            (0, -1),  // upp
-            (0, 1),   // ner
-            
-        };
-
         public Person(int cityWidth, int cityHeight)
         {
-            XDirections = random.Next(cityWidth);
-            YDirections = random.Next(cityHeight);
+            
 
-            var direction = Directions[random.Next(Directions.Length)]; //slumpar en riktning 
-            XDirections = direction.X;
-            YDirections = direction.Y;
+            X = random.Next(cityWidth);  //slupar personens startposition 
+            Y = random.Next(cityHeight);
+
+            int[,] Directions =
+            {
+                { -1, -1 }, // Vänster upp
+                { -1,  1 }, // Vänster ner
+                {  1, -1 }, // Höger upp
+                {  1,  1 }, // Höger ner
+
+                { -1,  0 }, // Vänster
+                {  1,  0 }, // Höger
+                {  0, -1 }, // Upp
+                {  0,  1 }  // Ner
+            };
+
+            int direction = random.Next(Directions.GetLength(0));
+
+            XDirections = Directions[direction, 0];
+            YDirections = Directions[direction, 1];
+
+            X += XDirections;
+            Y += YDirections;
+
         }
 
-        //public void move()
+
 
 
     }
