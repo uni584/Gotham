@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Gotham
+﻿namespace Gotham
 {
     internal class Person
     {
         public int X { get; set; }
         public int Y { get; set; }
+        public char Icon { get; set; }
         public int XDirections { get; set; }
         public int YDirections { get; set; }
 
@@ -38,7 +35,7 @@ namespace Gotham
         }
 
         //public void move()
-                    
+
 
     }
 }

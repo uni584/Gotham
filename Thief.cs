@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Gotham
+﻿namespace Gotham
 {
-    internal class Thief
+    internal class Thief : Person
     {
+        public Thief(int x, int y)
+        {
+            Icon = 'T';
+            X = x;
+            Y = y;
+        }
     }
 }

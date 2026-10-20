@@ -1,28 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Net.Http.Headers;
-using System.Text;
-
-namespace Gotham
+﻿namespace Gotham
 {
-    internal class Citizien
+    internal class Citizien : Person
     {
-
-        public string citizien;
-        public string bag;
 
         public List<Things> things = new List<Things>();
 
-        //public static string GetName()
-        //    {
-        //     string[] Name = new string[]
-        //     {
-        //         "Lars Göransson",
-        //         "Markus Olssom",
-        //         "Erik Ek",
-        //     };
-        //    }
+        public Citizien(int x, int y)
+        {
+            Icon = 'C';
+            X = x;
+            Y = y;
+        }
     }
 }
 
