@@ -8,37 +8,42 @@ namespace Gotham
     {
         public int Width { get; }
         public int Hight { get; }
-
-        public City(int width, int hight)
+        private List<Person> people = new List<Person>();
+        public City(int width, int hight, int citizen, int police, int thief)
         {
             Width = width;
             Hight = hight;
+
+            for(int i = 0; i < citizen; i++) people.Add(new Citizen(Random.Shared.Next(width), Random.Shared.Next(hight)));
+            for (int i = 0; i < thief; i++) people.Add(new Thief(Random.Shared.Next(width), Random.Shared.Next(hight)));
+            for (int i = 0; i < police; i++) people.Add(new Police(Random.Shared.Next(width), Random.Shared.Next(hight)));
+
         }
 
         public void Show() 
         {
+
+            char[,] grid = new char[Hight, Width];
+
             Console.WriteLine("City======================================================================================================");
-            for (int s = 0; s < 20; s++)
+            for (int s = 0; s < Hight; s++)
             {
+                Console.Write("X");
 
-                Console.WriteLine("X                                                                                                        X");
-                //for (int x = 0; x < 50; x++)
-                //{
-
-
-                //}
-
+                for(int i = 0; i < Width; i++)
+                {
+                    //char symbol = grid[s, i];
+                    Console.Write(".");
+                     
+                }
+                Console.WriteLine("X");
             }
             Console.WriteLine("Status====================================================================================================");
             for (int s = 0; s < 5; s++)
             {
 
                 Console.WriteLine("X                                                                                                        X");
-                //for (int x = 0; x < 50; x++)
-                //{
-
-
-                //}
+                
 
             }
             Console.WriteLine("News======================================================================================================");
@@ -46,11 +51,7 @@ namespace Gotham
             {
 
                 Console.WriteLine("X                                                                                                        X");
-                //for (int x = 0; x < 50; x++)
-                //{
-
-
-                //}
+                
 
             }
             Console.WriteLine("==========================================================================================================");
