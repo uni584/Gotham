@@ -6,7 +6,7 @@ namespace Gotham
 {
     internal class Inventory
     {
-        private List<Things> items = new List<Things>();
+        public List<Things> items = new List<Things>();
         
     }
 }

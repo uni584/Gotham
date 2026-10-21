@@ -21,7 +21,7 @@
 
             Console.WriteLine();
             Console.WriteLine();
-            City city = new City(50, 30);
+            City city = new City(100, 30, 2, 2, 2);
 
             //while(true)
             //{

@@ -2,11 +2,10 @@
 {
     internal class Thief : Person
     {
-        public Thief(int x, int y)
+        public Thief(int x, int y) : base(x, y)
         {
             Icon = 'T';
-            X = x;
-            Y = y;
+            
         }
     }
 }
