@@ -12,36 +12,43 @@
 
         public Person(int cityWidth, int cityHeight)
         {
-            
 
-            X = random.Next(cityWidth);  //slupar personens startposition 
-            Y = random.Next(cityHeight);
+
+            X = cityWidth;  //slupar personens startposition 
+            Y = cityHeight;
 
             int[,] Directions =
             {
-                { -1, -1 }, // Vänster upp
-                { -1,  1 }, // Vänster ner
-                {  1, -1 }, // Höger upp
-                {  1,  1 }, // Höger ner
+                { -1, -1 }, // Vänster ner
+                { -1,  1 }, // Vänster upp
+                {  1, -1 }, // Höger ner
+                {  1,  1 }, // Höger upp
 
                 { -1,  0 }, // Vänster
                 {  1,  0 }, // Höger
                 {  0, -1 }, // Upp
                 {  0,  1 }  // Ner
             };
+            int randomDirection = random.Next(Directions.GetLength(0));
 
-            int direction = random.Next(Directions.GetLength(0));
-
-            XDirections = Directions[direction, 0];
-            YDirections = Directions[direction, 1];
-
-            X += XDirections;
-            Y += YDirections;
-
+            XDirections = Directions[randomDirection, 0];
+            YDirections = Directions[randomDirection, 1];
         }
 
-
-
-
+        public void Move(int cityWidth, int cityHeight)
+        {
+            X += XDirections;
+            Y += YDirections;
+            if (X < 0 || X >= cityWidth)
+            {
+                XDirections *= -1;
+                X += XDirections;
+            }
+            if (Y < 0 || Y >= cityHeight)
+            {
+                YDirections *= -1;
+                Y += YDirections;
+            }
+        }
     }
 }
