@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Gotham
+﻿namespace Gotham
 {
     internal class City
     {
@@ -14,51 +10,96 @@ namespace Gotham
             Width = width;
             Hight = hight;
 
-            for(int i = 0; i < citizen; i++) people.Add(new Citizen(Random.Shared.Next(width), Random.Shared.Next(hight)));
-            for (int i = 0; i < thief; i++) people.Add(new Thief(Random.Shared.Next(width), Random.Shared.Next(hight)));
-            for (int i = 0; i < police; i++) people.Add(new Police(Random.Shared.Next(width), Random.Shared.Next(hight)));
-
+            for (int i = 0; i < citizen; i++)
+            {
+                people.Add(new Citizen(Random.Shared.Next(width), Random.Shared.Next(hight)));
+            }
+            for (int i = 0; i < thief; i++)
+            {
+                people.Add(new Thief(Random.Shared.Next(width), Random.Shared.Next(hight)));
+            }
+            for (int i = 0; i < police; i++)
+            {
+                people.Add(new Police(Random.Shared.Next(width), Random.Shared.Next(hight)));
+            }
         }
 
-        public void Show() 
+        public void Show()
         {
 
             char[,] grid = new char[Hight, Width];
+            for (int s = 0; s < Hight; s++)
+            {
+                for (int i = 0; i < Width; i++)
+                {
+                    grid[s, i] = '.';
+                }
+            }
 
+            foreach (var person in people)
+            {
+                char current = grid[person.Y, person.X];
+                if (current != 'P' || person.Icon == 'P')
+                {
+                    grid[person.Y, person.X] = person.Icon;
+                }
+            }
+            Console.Clear();
             Console.WriteLine("City======================================================================================================");
             for (int s = 0; s < Hight; s++)
             {
-                Console.Write("X");
+                Console.Write("|");
 
-                for(int i = 0; i < Width; i++)
+                for (int i = 0; i < Width; i++)
                 {
-                    //char symbol = grid[s, i];
-                    Console.Write(".");
-                     
+                    char symbol = grid[s, i];
+                    switch (symbol)
+                    {
+                        case 'C':
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            break;
+                        case 'P':
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            break;
+                        case 'T':
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            break;
+                        case 'X':
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            break;
+                        default:
+                            Console.ResetColor();
+                            break;
+                    }
+                    Console.Write(symbol);
                 }
-                Console.WriteLine("X");
+                Console.WriteLine("|");
             }
-            Console.WriteLine("Status====================================================================================================");
-            for (int s = 0; s < 5; s++)
-            {
+            //Console.WriteLine("Status====================================================================================================");
+            //for (int s = 0; s < 5; s++)
+            //{
 
-                Console.WriteLine("X                                                                                                        X");
-                
+            //    Console.WriteLine("X                                                                                                        X");
 
-            }
-            Console.WriteLine("News======================================================================================================");
-            for (int s = 0; s < 5; s++)
-            {
 
-                Console.WriteLine("X                                                                                                        X");
-                
+            //}
+            //Console.WriteLine("News======================================================================================================");
+            //for (int s = 0; s < 5; s++)
+            //{
 
-            }
-            Console.WriteLine("==========================================================================================================");
+            //    Console.WriteLine("X                                                                                                        X");
 
+
+            //}
+            //Console.WriteLine("==========================================================================================================");
         }
 
-
-
+        public void Update()
+        {
+            foreach (var person in people)
+            {
+                person.Move(Width, Hight);
+            }
+        }
     }
 }
