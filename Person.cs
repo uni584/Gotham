@@ -35,7 +35,7 @@
             YDirections = Directions[randomDirection, 1];
         }
 
-        public void Move(int cityWidth, int cityHeight)
+        public void Move(int cityWidth, int cityHeight) // uppdatera som pacman
         {
             X += XDirections;
             Y += YDirections;
