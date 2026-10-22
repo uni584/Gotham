@@ -21,7 +21,7 @@
 
             Console.WriteLine();
             Console.WriteLine();
-            City city = new City(20, 10, 2, 2, 2);
+            City city = new City(50, 20, 2, 2, 2);
 
             while (true)
             {
@@ -30,6 +30,7 @@
                 //Console.Clear();
 
                 Thread.Sleep(1000); // Delay for 1 second
+                Console.Clear();
             }
 
 
