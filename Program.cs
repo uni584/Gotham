@@ -21,17 +21,23 @@
 
             Console.WriteLine();
             Console.WriteLine();
-            City city = new City(50, 20, 2, 2, 2);
+            City city = new City(100, 25, 2, 2, 2); 
+            List<Person> people = new List<Person>();
+            Prison prison = new Prison(0,10, 10, people);
 
             while (true)
             {
                 city.Update();
-                city.Show();
+                city.Show(); 
+                prison.show();
                 //Console.Clear();
 
                 Thread.Sleep(1000); // Delay for 1 second
                 Console.Clear();
             }
+
+           
+            
 
 
 
