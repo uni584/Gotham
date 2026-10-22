@@ -21,15 +21,17 @@
 
             Console.WriteLine();
             Console.WriteLine();
+            Thread.Sleep(2000);
             City city = new City(100, 25 , 30 , 10, 20);
 
             while (true)
             {
                 city.Update();
+                { Thread.Sleep(750); }
                 city.Show();
-                //Console.Clear();
+                
 
-                Thread.Sleep(1000); // Delay for 1 second
+                //Thread.Sleep(750); // Delay for 1 second
                 
             }
 

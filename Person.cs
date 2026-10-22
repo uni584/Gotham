@@ -39,16 +39,25 @@
         {
             X += XDirections;
             Y += YDirections;
-            if (X < 0 || X >= cityWidth)
+
+            if (X >= cityWidth)
             {
-                XDirections *= -1;
-                X += XDirections;
+                X = 0;
             }
-            if (Y < 0 || Y >= cityHeight)
+            else if (X < 0)
             {
-                YDirections *= -1;
-                Y += YDirections;
+                X = cityWidth - 1;
             }
+
+            if (Y >= cityHeight)
+            {
+                Y = 0;
+            }
+            else if (Y < 0)
+            {
+                Y = cityHeight - 1;
+            }
+
         }
     }
 }
