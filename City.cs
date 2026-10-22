@@ -4,6 +4,11 @@
     {
         public int Width { get; }
         public int Hight { get; }
+
+        public int RobberiesCount { get; set; }
+        public int ArrestedThievesCount { get; set; }
+        public int StolenThingsCount { get; set; }
+        public int ReturnedThingsCount { get; set; }
         private List<Person> people = new List<Person>();
         public City(int width, int hight, int citizen, int police, int thief)
         {
@@ -32,7 +37,7 @@
             {
                 for (int i = 0; i < Width; i++)
                 {
-                    grid[s, i] = ' ';
+                    grid[s, i] = '.';
                 }
             }
 
@@ -45,6 +50,8 @@
                 }
             }
             Console.Clear();
+            Console.ResetColor();
+
             Console.WriteLine("City==================================================================================================");
             for (int s = 0; s < Hight; s++)
             {
@@ -72,6 +79,7 @@
                             break;
                     }
                     Console.Write(symbol);
+                    Console.ResetColor();
                 }
                 Console.WriteLine("|");
             }
@@ -101,6 +109,58 @@
             {
                 person.Move(Width, Hight);
             }
+            CheckMeeting();
+        }
+
+        public void CheckMeeting()
+        {
+            foreach (var person in people.ToList())
+            {
+                foreach (var otherPerson in people.ToList())
+                {
+                    if (!people.Contains(person) || !people.Contains(otherPerson))
+                        continue;
+
+                    if (person != otherPerson &&
+                        person.X == otherPerson.X &&
+                        person.Y == otherPerson.Y)
+                    {
+                        if (person is Thief thief &&
+                            otherPerson is Citizen citizen)
+                        {
+                            if (citizen.Inventory.items.Count > 0)
+                            {
+                                //Item? stolenItem = thief.Steal(citizen);
+                                var stolenItem = citizen.Inventory.items[0];
+
+                                citizen.Inventory.items.Remove(stolenItem);
+                                //thief.Inventory.items.Add(stolenItem);
+                                if (stolenItem != null)
+                                {
+                                    continue;
+                                }
+                                RobberiesCount++;
+                                StolenThingsCount++;
+                            }
+                        }
+                        else if (person is Police police &&
+                                 otherPerson is Thief caughtThief)
+                        {
+                            //person.Arrest(caughtThief);
+                            ArrestedThievesCount++;
+                            people.Remove(caughtThief);
+                        }
+                    }
+                }
+            }
+        }
+
+        public void ShowStatus()
+        {
+            Console.WriteLine($"Robberies: {RobberiesCount}");
+            Console.WriteLine($"Arrested Thieves: {ArrestedThievesCount}");
+            Console.WriteLine($"Stolen Things: {StolenThingsCount}");
+            Console.WriteLine($"Returned Things: {ReturnedThingsCount}");
         }
     }
 }
