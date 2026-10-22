@@ -27,11 +27,10 @@
             {
                 city.Update();
                 city.Show();
-                //Console.Clear();
 
-                Thread.Sleep(1000); // Delay for 1 second
-                
+                Thread.Sleep(1000);
             }
+
 
 
 
