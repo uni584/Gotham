@@ -22,96 +22,30 @@
             Console.WriteLine();
             Console.WriteLine();
             Thread.Sleep(1000);
-            City city = new City(100, 25, 2, 2, 2);
 
             List<Person> people = new List<Person>();
-            Prison prison = new Prison(0, 10, 94, people);
+
+            City city = new City(100, 25, 2, 2, 2);
+            Prison prison = new Prison(0, 10, 15, people);
 
             List<Person> peoples = new List<Person>();
-            PoorHouse poorhouse = new PoorHouse(0, 10, 93, people);
+            PoorHouse poorhouse = new PoorHouse(0, 10, 15, people);
 
             StatusFeed statusfeed = new StatusFeed(10, 90, "");
 
-            NewsFeed newsfeed = new NewsFeed(10, 9, "");
+            NewsFeed newsfeed = new NewsFeed(10, 90, "");
 
-                while (true)
-                {
-                city.Update(); 
+            while (true)
+            {
+                city.Update();
                 city.Show();
                 prison.show();
                 poorhouse.Show();
                 statusfeed.show();
                 newsfeed.Show();
-                //Console.Clear();
-            
+
                 Thread.Sleep(750); // Delay for 1 second
-                }
-                
-     
-               
-
-                
-
-            //while (true)
-            //{
-                
-            //}
-
-           
-            
-
-
-
-            //Random random = new Random();
-            //string[] names = ["Svensson", "Eriksson", "Karlsson", "Hermundsson", "Qvist",
-            //    "Olofsson", "Håkansson", "Brwon", "Stark", "Rogers",
-            //    "Banner", "Furry", "Jonas", "Lukas", "Amjad",
-            //    "Taen", "Micke", "Wallenberg", "Trump", "Putin"
-            //    ];
-            //List<Citizan> citizans = new List<Citizan>();
-
-
-            //for (int i = 0; i < 20; i++)
-            //{
-            //    string name = names[random.Next(names.Length)];
-            //    Citizan citizan = new Citizan(name);
-            //    citizans.Add(citizan);
-            //}
-
-            //foreach (Citizan C in citizans)
-            //{
-            //    //Console.WriteLine("C");
-
-            //    Console.WriteLine(C.Name);
-            //    Console.WriteLine("-----");
-            //    foreach (Item item in C.Inventory)
-            //    {
-            //        Console.WriteLine(item.Name);
-
-            //    }
-            //    Console.WriteLine();
-            //}
-
-            // int width = 20;
-            // int lenght = 50;
-            //Console.WriteLine("City======================================================================================================");
-            // for (int s = 0; s < 20; s++)
-            // {
-
-            //     Console.WriteLine("X                                                                                                        X");
-            //     //for (int x = 0; x < 50; x++)
-            //     //{
-
-
-            //     //}
-
-            // }Console.WriteLine("Status====================================================================================================");
-
-
-
-
-
-
+            }
         }
     }
 }

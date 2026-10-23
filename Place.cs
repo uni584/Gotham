@@ -1,11 +1,4 @@
-﻿using Gotham;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Reflection.PortableExecutable;
-using System.Text;
-
-namespace Gotham
+﻿namespace Gotham
 {
     internal class Place
     {
@@ -26,40 +19,44 @@ namespace Gotham
         public Prison(int prisoners, int height, int width, List<Person> people) : base(height, width, people)
         {
             Prisoners = prisoners;
-        } 
+        }
         public void show()
         {
-          
-                char[,] grid = new char[Height, Width];
-                for (int s = 0; s < Height; s++)
-                {
-                    for (int i = 0; i < Width; i++)
-                    {
-                        grid[s, i] = '.';
-                    }
-                }
 
-                Console.WriteLine("Prison" + new string('=', Width));
-                for (int i = 0; i < Height; i++)
-                {
-                    Console.WriteLine("|" + new string (' ', Width + 6) + '|' );
-               
-                }
-
-            //Console.WriteLine(new string('=', Width + 8));
-               
-           
-        }
-     }
-
-       
-        class PoorHouse : Place
-        {
-            public int PeopleIn { get; set; }
-            public PoorHouse(int peoplein, int height, int width, List<Person> people) : base(height, width, people)
+            char[,] grid = new char[Height, Width];
+            for (int s = 0; s < Height; s++)
             {
-                PeopleIn = peoplein;
+                for (int i = 0; i < Width; i++)
+                {
+                    grid[s, i] = '.';
+                }
             }
+
+            Console.WriteLine("Prison" + new string('=', Width));
+            for (int i = 0; i < Height; i++)
+            {
+                Console.Write("|");
+                for (int j = 0; j < Width; j++)
+                {
+                    Console.Write(".");
+                }
+                Console.WriteLine("|");
+            }
+
+            Console.WriteLine(new string('=', Width + 8));
+
+
+        }
+    }
+
+
+    class PoorHouse : Place
+    {
+        public int PeopleIn { get; set; }
+        public PoorHouse(int peoplein, int height, int width, List<Person> people) : base(height, width, people)
+        {
+            PeopleIn = peoplein;
+        }
         public void Show()
         {
             char[,] grid = new char[Height, Width];
@@ -74,18 +71,17 @@ namespace Gotham
             Console.WriteLine("PoorHouse" + new string('=', Width));
             for (int i = 0; i < Height; i++)
             {
-                Console.WriteLine("|" + new string(' ', Width + 7) + '|');
-
+                Console.Write("|");
+                for (int j = 0; j < Width; j++)
+                {
+                    Console.Write(".");
+                }
+                Console.WriteLine("|");
             }
 
-            //Console.WriteLine(new string('=', Width + 8));
-
+            Console.WriteLine(new string('=', Width + 8));
         }
-
-
-
-        }
-
     }
+}
 
-    
+
