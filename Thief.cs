@@ -7,5 +7,10 @@
             Icon = 'T';
             
         }
+
+        public void StolenItems()
+        {
+
+        }
     }
 }

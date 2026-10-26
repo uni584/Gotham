@@ -110,6 +110,21 @@
                 person.Move(Width, Hight);
             }
             CheckMeeting();
+
+        }
+
+        public void Arr( Prison prison)
+        {
+            foreach (var police in people.OfType<Police>().ToList())
+            {
+                foreach (var Thief in people.OfType<Thief>().ToList())
+                {
+                    if (police.X == Thief.X && police.Y == Thief.Y)
+                    {
+                        police.Arrest(Thief, prison, people);
+                    }
+                }
+            }
         }
 
         public void CheckMeeting()

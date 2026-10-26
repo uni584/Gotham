@@ -37,7 +37,9 @@
 
             while (true)
             {
-                city.Update();
+               
+                city.Update(); 
+                city.Arr(prison);
                 city.Show();
                 prison.show();
                 poorhouse.Show();
