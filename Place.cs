@@ -1,4 +1,7 @@
-﻿namespace Gotham
+﻿using System.Diagnostics.Contracts;
+using System.Runtime.InteropServices;
+
+namespace Gotham
 {
     internal class Place
     {
@@ -12,6 +15,16 @@
             People = people;
         }
 
+        public void Update()
+        {
+            foreach (var person in People)
+            {
+                person.Move(Width, Height);
+            }
+            
+
+        }
+
     }
     class Prison : Place
     {
@@ -23,12 +36,22 @@
         public void show()
         {
 
-            char[,] grid = new char[Height, Width];
+            char[,] grid = new char[Height - 1, Width - 1];
             for (int s = 0; s < Height; s++)
             {
-                for (int i = 0; i < Width; i++)
+                bool hittad = false;
+                foreach (var person in People)
                 {
-                    grid[s, i] = '.';
+                    if (person.X == s && person.Y == s)
+                    {
+                        Console.Write(person.Icon);
+                        hittad = true;
+                        break;
+                    }
+                }
+                if (!hittad) 
+                {
+                    Console.Write(' ');
                 }
             }
 
@@ -59,12 +82,22 @@
         }
         public void Show()
         {
-            char[,] grid = new char[Height, Width];
+            char[,] grid = new char[Height - 1, Width - 1 ];
             for (int s = 0; s < Height; s++)
             {
-                for (int i = 0; i < Width; i++)
+                bool hittad = false;
+                foreach (var person in People)
                 {
-                    grid[s, i] = '.';
+                    if (person.X == s && person.Y == s)
+                    {
+                        Console.Write(person.Icon);
+                        hittad = true;
+                        break;
+                    }
+                    if (!hittad)
+                    {
+                        Console.Write(' ');
+                    }
                 }
             }
 

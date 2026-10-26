@@ -40,6 +40,8 @@
                
                 city.Update(); 
                 city.Arr(prison);
+                prison.Update();
+                poorhouse.Update();
                 city.Show();
                 prison.show();
                 poorhouse.Show();
