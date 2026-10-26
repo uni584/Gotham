@@ -52,7 +52,7 @@
             Console.Clear();
             Console.ResetColor();
 
-            Console.WriteLine("City==================================================================================================");
+            Console.WriteLine("City" + new string('=', Width - 2));
             for (int s = 0; s < Hight; s++)
             {
                 Console.Write("|");
@@ -83,6 +83,7 @@
                 }
                 Console.WriteLine("|");
             }
+            Console.WriteLine(new string('=', Width + 2));
             //Console.WriteLine("======================================================================================================");
             //Console.WriteLine("Status====================================================================================================");
             //for (int s = 0; s < 5; s++)
@@ -130,17 +131,10 @@
                         {
                             if (citizen.Inventory.items.Count > 0)
                             {
-                                //Item? stolenItem = thief.Steal(citizen);
-                                var stolenItem = citizen.Inventory.items[0];
-
-                                citizen.Inventory.items.Remove(stolenItem);
-                                //thief.Inventory.items.Add(stolenItem);
-                                if (stolenItem != null)
-                                {
-                                    continue;
-                                }
+                                thief.Steal(citizen);
                                 RobberiesCount++;
                                 StolenThingsCount++;
+
                             }
                         }
                         else if (person is Police police &&

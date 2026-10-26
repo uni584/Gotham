@@ -21,7 +21,7 @@
 
             Console.WriteLine();
             Console.WriteLine();
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
 
             List<Person> people = new List<Person>();
 
@@ -31,9 +31,9 @@
             List<Person> peoples = new List<Person>();
             PoorHouse poorhouse = new PoorHouse(0, 10, 15, people);
 
-            StatusFeed statusfeed = new StatusFeed(10, 90, "");
+            StatusFeed statusfeed = new StatusFeed(5, 60, "");
 
-            NewsFeed newsfeed = new NewsFeed(10, 90, "");
+            NewsFeed newsfeed = new NewsFeed(5, 55, "");
 
             while (true)
             {
