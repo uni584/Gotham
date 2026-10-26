@@ -1,6 +1,6 @@
 ﻿namespace Gotham
 {
-    internal class Person
+    public class Person
     {
         public int X { get; set; }
         public int Y { get; set; }

@@ -1,87 +1,87 @@
 ﻿namespace Gotham
 {
-    internal class Place
+    public class Place
     {
+        public string Name { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
-        public List<Person> People { get; set; } = new List<Person>();
-        public Place(int height, int width, List<Person> people)
+        public List<Person> People { get; set; }
+
+        public Place(string name, int width, int height)
         {
-            Height = height;
+            Name = name;
             Width = width;
-            People = people;
+            Height = height;
+            People = new List<Person>();
         }
 
-    }
-    class Prison : Place
-    {
-        public int Prisoners { get; set; }
-        public Prison(int prisoners, int height, int width, List<Person> people) : base(height, width, people)
+        public void AddPerson(Person person)
         {
-            Prisoners = prisoners;
+            People.Add(person);
         }
-        public void show()
+
+        public void RemovePerson(Person person)
         {
-
-            char[,] grid = new char[Height, Width];
-            for (int s = 0; s < Height; s++)
-            {
-                for (int i = 0; i < Width; i++)
-                {
-                    grid[s, i] = '.';
-                }
-            }
-
-            Console.WriteLine("Prison" + new string('=', Width));
-            for (int i = 0; i < Height; i++)
-            {
-                Console.Write("|");
-                for (int j = 0; j < Width; j++)
-                {
-                    Console.Write(".");
-                }
-                Console.WriteLine("|");
-            }
-
-            Console.WriteLine(new string('=', Width + 8));
-
-
+            People.Remove(person);
         }
-    }
 
-
-    class PoorHouse : Place
-    {
-        public int PeopleIn { get; set; }
-        public PoorHouse(int peoplein, int height, int width, List<Person> people) : base(height, width, people)
-        {
-            PeopleIn = peoplein;
-        }
         public void Show()
         {
             char[,] grid = new char[Height, Width];
-            for (int s = 0; s < Height; s++)
+
+            for (int y = 0; y < Height; y++)
             {
-                for (int i = 0; i < Width; i++)
+                for (int x = 0; x < Width; x++)
                 {
-                    grid[s, i] = '.';
+                    grid[y, x] = ' ';
                 }
             }
 
-            Console.WriteLine("PoorHouse" + new string('=', Width));
-            for (int i = 0; i < Height; i++)
+            foreach (Person person in People)
+            {
+                if (person.X >= 0 && person.X < Width &&
+                    person.Y >= 0 && person.Y < Height)
+                {
+                    grid[person.Y, person.X] = person.Icon;
+                }
+            }
+
+            Console.ResetColor();
+            Console.WriteLine(Name + " " + new string('=', Width));
+
+            for (int y = 0; y < Height; y++)
             {
                 Console.Write("|");
-                for (int j = 0; j < Width; j++)
+
+                for (int x = 0; x < Width; x++)
                 {
-                    Console.Write(".");
+                    char symbol = grid[y, x];
+
+                    switch (symbol)
+                    {
+                        case 'C':
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            break;
+                        case 'P':
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            break;
+                        case 'T':
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            break;
+                        default:
+                            Console.ResetColor();
+                            break;
+                    }
+
+                    Console.Write(symbol);
+                    Console.ResetColor();
                 }
+
                 Console.WriteLine("|");
             }
 
-            Console.WriteLine(new string('=', Width + 8));
+            Console.WriteLine(new string('=', Width + 2));
+            Console.WriteLine($"People: {People.Count}");
         }
     }
 }
-
-

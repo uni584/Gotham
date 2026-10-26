@@ -23,13 +23,7 @@
             Console.WriteLine();
             Thread.Sleep(1000);
 
-            List<Person> people = new List<Person>();
-
-            City city = new City(100, 25, 2, 2, 2);
-            Prison prison = new Prison(0, 10, 15, people);
-
-            List<Person> peoples = new List<Person>();
-            PoorHouse poorhouse = new PoorHouse(0, 10, 15, people);
+            City city = new City(10, 5, 10, 20, 3);
 
             StatusFeed statusfeed = new StatusFeed(10, 90, "");
 
@@ -38,11 +32,17 @@
             while (true)
             {
                 city.Update();
+
+                Console.Clear();
+
                 city.Show();
-                prison.show();
-                poorhouse.Show();
-                statusfeed.show();
-                newsfeed.Show();
+                city.Prison.Show();
+                city.PoorHouse.Show();
+                city.ShowStatus();
+
+
+                //statusfeed.show();
+                //newsfeed.Show();
 
                 Thread.Sleep(750); // Delay for 1 second
             }
