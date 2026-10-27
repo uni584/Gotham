@@ -45,6 +45,8 @@
                 newsfeed.Show();
                 city.ShowStatus();
 
+                AddNew.Input(city,100,25);
+
                 Thread.Sleep(500);
             }
         }
