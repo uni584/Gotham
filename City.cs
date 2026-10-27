@@ -9,6 +9,8 @@
         public Prison Prison { get; set; }
         public PoorHouse PoorHouse { get; set; }
 
+        public List<string> News { get; set; } = new List<string>();
+
         public City(int width, int height, int citizen, int police, int thief)
             : base("Gotham City", height, width, 0, 0)
         {
@@ -71,6 +73,8 @@
                                 RobberiesCount++;
                                 StolenThingsCount++;
 
+                                AddNews($" Tjuven ({thief}, {citizen}).");
+
                             }
                         }
                         else if (person is Police police &&
@@ -92,6 +96,17 @@
             Console.WriteLine($"Arrested Thieves: {ArrestedThievesCount}");
             Console.WriteLine($"Stolen Things: {StolenThingsCount}");
             Console.WriteLine($"Returned Things: {ReturnedThingsCount}");
+        }
+
+
+        public void AddNews(string message)
+        {
+            News.Add(message);
+
+            if (News.Count > 5)
+            {
+                News.RemoveAt(0);
+            }
         }
     }
 }
