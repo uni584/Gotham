@@ -7,6 +7,7 @@
         public char Icon { get; set; }
         public int XDirections { get; set; }
         public int YDirections { get; set; }
+        public string Name { get; set; }
 
         private static Random random = new Random();
 
@@ -16,6 +17,34 @@
 
             X = cityWidth;  //slupar personens startposition 
             Y = cityHeight;
+
+            string[] names =
+            {
+                "Taen", "Jonas", "Amjad", "Lucas",
+                "Adam", "Alexander", "Andreas", "Anton", "Benjamin",
+                "Daniel", "David", "Elias", "Emil", "Erik",
+                "Felix", "Filip", "Fredrik", "Gabriel", "Gustav",
+                "Hampus", "Henrik", "Hugo", "Isak", "Jacob",
+                "Johan", "Jonathan", "Josef", "Kevin", "Leo",
+                "Leon", "Liam", "Linus", "Lucas", "Ludvig",
+                "Marcus", "Martin", "Max", "Melvin", "Michael",
+                "Mohammed", "Nils", "Noah", "Oliver", "Oscar",
+                "Oskar", "Patrik", "Philip", "Rasmus", "Robin",
+                "Samuel", "Sebastian", "Simon", "Theo", "William",
+
+                "Alice", "Alma", "Amanda", "Amelia", "Anna",
+                "Astrid", "Bella", "Caroline", "Cecilia", "Clara",
+                "Ebba", "Elin", "Ella", "Ellen", "Elsa",
+                "Emma", "Emilia", "Estelle", "Evelina", "Felicia",
+                "Freja", "Hanna", "Ida", "Isabella", "Julia",
+                "Klara", "Lina", "Lisa", "Liv", "Louise",
+                "Maja", "Maria", "Matilda", "Moa", "Molly",
+                "Nathalie", "Nora", "Olivia", "Rebecca", "Ronja",
+                "Saga", "Sandra", "Sara", "Selma", "Sofia",
+                "Stella", "Tilda", "Tindra", "Vera", "Wilma"
+            };
+
+            Name = names[Random.Shared.Next(names.Length)];
 
             int[,] Directions =
             {

@@ -73,7 +73,13 @@
                                 RobberiesCount++;
                                 StolenThingsCount++;
 
-                                AddNews($" Tjuven ({thief}, {citizen}).");
+                                if (citizen.Inventory.items.Count == 0)
+                                {
+                                    PoorHouse.AcceptCitizen(citizen);
+                                    People.Remove(citizen);
+                                }
+
+                                AddNews($" Tjuven ({thief.Name}, rånar {citizen.Name}).");
 
                             }
                         }
