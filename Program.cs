@@ -23,7 +23,7 @@
             Console.WriteLine();
             Thread.Sleep(2000);
 
-            City city = new City(100, 25, 20, 300, 10);
+            City city = new City(100, 25, 20, 10, 10);
             StatusFeed statusfeed = new StatusFeed(5, 60, "");
             NewsFeed newsfeed = new NewsFeed(5, 55, "");
 
@@ -44,6 +44,8 @@
                 Console.SetCursorPosition(0, city.Height + 10);
                 newsfeed.Show();
                 city.ShowStatus();
+
+                AddNew.Input(city,100,25);
 
                 Thread.Sleep(500);
             }
