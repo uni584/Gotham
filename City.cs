@@ -1,106 +1,97 @@
 ﻿namespace Gotham
 {
-    internal class City
+    public class City : Place
     {
-        public int Width { get; }
-        public int Hight { get; }
-        private List<Person> people = new List<Person>();
-        public City(int width, int hight, int citizen, int police, int thief)
+        public int RobberiesCount { get; set; }
+        public int StolenThingsCount { get; set; }
+        public int ReturnedThingsCount { get; set; }
+        public int ArrestedThievesCount { get; set; }
+        public Prison Prison { get; set; }
+        public PoorHouse PoorHouse { get; set; }
+
+        public City(int width, int height, int citizen, int police, int thief)
+            : base("Gotham City", height, width, 0, 0)
         {
-            Width = width;
-            Hight = hight;
+            Prison = new Prison(5, 20, width + 3, 0);
+            PoorHouse = new PoorHouse(5, 20, width + 3, 8);
 
             for (int i = 0; i < citizen; i++)
             {
-                people.Add(new Citizen(Random.Shared.Next(width), Random.Shared.Next(hight)));
+                People.Add(new Citizen(
+                    Random.Shared.Next(width),
+                    Random.Shared.Next(height)));
             }
+
             for (int i = 0; i < thief; i++)
             {
-                people.Add(new Thief(Random.Shared.Next(width), Random.Shared.Next(hight)));
+                People.Add(new Thief(
+                    Random.Shared.Next(width),
+                    Random.Shared.Next(height)));
             }
+
             for (int i = 0; i < police; i++)
             {
-                people.Add(new Police(Random.Shared.Next(width), Random.Shared.Next(hight)));
+                People.Add(new Police(
+                    Random.Shared.Next(width),
+                    Random.Shared.Next(height)));
             }
-        }
-
-        public void Show()
-        {
-
-            char[,] grid = new char[Hight, Width];
-            for (int s = 0; s < Hight; s++)
-            {
-                for (int i = 0; i < Width; i++)
-                {
-                    grid[s, i] = ' ';
-                }
-            }
-
-            foreach (var person in people)
-            {
-                char current = grid[person.Y, person.X];
-                if (current != 'P' || person.Icon == 'P')
-                {
-                    grid[person.Y, person.X] = person.Icon;
-                }
-            }
-            Console.Clear();
-            Console.WriteLine("City==================================================================================================");
-            for (int s = 0; s < Hight; s++)
-            {
-                Console.Write("|");
-
-                for (int i = 0; i < Width; i++)
-                {
-                    char symbol = grid[s, i];
-                    switch (symbol)
-                    {
-                        case 'C':
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            break;
-                        case 'P':
-                            Console.ForegroundColor = ConsoleColor.Blue;
-                            break;
-                        case 'T':
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            break;
-                        case 'X':
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                            break;
-                        default:
-                            Console.ResetColor();
-                            break;
-                    }
-                    Console.Write(symbol);
-                }
-                Console.WriteLine("|");
-            }
-            Console.WriteLine("======================================================================================================");
-            //Console.WriteLine("Status====================================================================================================");
-            //for (int s = 0; s < 5; s++)
-            //{
-
-            //    Console.WriteLine("X                                                                                                        X");
-
-
-            //}
-            //Console.WriteLine("News======================================================================================================");
-            //for (int s = 0; s < 5; s++)
-            //{
-
-            //    Console.WriteLine("X                                                                                                        X");
-
-
-            //}
-            //Console.WriteLine("==========================================================================================================");
         }
 
         public void Update()
         {
-            foreach (var person in people)
+            foreach (var person in People)
             {
-                person.Move(Width, Hight);
+                person.Move(Width, Height);
             }
+            CheckMeeting();
+
+        }
+
+        
+
+        public void CheckMeeting()
+        {
+            foreach (var person in People.ToList())
+            {
+                foreach (var otherPerson in People.ToList())
+                {
+                    if (!People.Contains(person) || !People.Contains(otherPerson))
+                        continue;
+
+                    if (person != otherPerson &&
+                        person.X == otherPerson.X &&
+                        person.Y == otherPerson.Y)
+                    {
+                        if (person is Thief thief &&
+                            otherPerson is Citizen citizen)
+                        {
+                            if (citizen.Inventory.items.Count > 0)
+                            {
+                                thief.Steal(citizen);
+                                RobberiesCount++;
+                                StolenThingsCount++;
+
+                            }
+                        }
+                        else if (person is Police police &&
+                                 otherPerson is Thief caughtThief)
+                        {
+                            Prison.ArrestThief(caughtThief);
+                            ArrestedThievesCount++;
+                            People.Remove(caughtThief);
+                            //Prison.AddPerson(caughtThief);
+                        }
+                    }
+                }
+            }
+        }
+
+        public void ShowStatus()
+        {
+            Console.WriteLine($"Robberies: {RobberiesCount}");
+            Console.WriteLine($"Arrested Thieves: {ArrestedThievesCount}");
+            Console.WriteLine($"Stolen Things: {StolenThingsCount}");
+            Console.WriteLine($"Returned Things: {ReturnedThingsCount}");
         }
     }
 }

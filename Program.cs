@@ -21,70 +21,32 @@
 
             Console.WriteLine();
             Console.WriteLine();
-            City city = new City(100, 25 , 30 , 10, 20);
+            Thread.Sleep(2000);
+
+            City city = new City(100, 25, 20, 300, 10);
+            StatusFeed statusfeed = new StatusFeed(5, 60, "");
+            NewsFeed newsfeed = new NewsFeed(5, 55, "");
+
+            Console.Clear();
 
             while (true)
             {
                 city.Update();
+
                 city.Show();
-                //Console.Clear();
+                city.Prison.Show();
+                city.PoorHouse.Show();
 
-                Thread.Sleep(1000); // Delay for 1 second
-                
+                Console.SetCursorPosition(0, city.Height + 3);
+                city.ShowStatus();
+                statusfeed.show();
+
+                Console.SetCursorPosition(0, city.Height + 10);
+                newsfeed.Show();
+                city.ShowStatus();
+
+                Thread.Sleep(500);
             }
-
-
-
-            //Random random = new Random();
-            //string[] names = ["Svensson", "Eriksson", "Karlsson", "Hermundsson", "Qvist",
-            //    "Olofsson", "Håkansson", "Brwon", "Stark", "Rogers",
-            //    "Banner", "Furry", "Jonas", "Lukas", "Amjad",
-            //    "Taen", "Micke", "Wallenberg", "Trump", "Putin"
-            //    ];
-            //List<Citizan> citizans = new List<Citizan>();
-
-
-            //for (int i = 0; i < 20; i++)
-            //{
-            //    string name = names[random.Next(names.Length)];
-            //    Citizan citizan = new Citizan(name);
-            //    citizans.Add(citizan);
-            //}
-
-            //foreach (Citizan C in citizans)
-            //{
-            //    //Console.WriteLine("C");
-
-            //    Console.WriteLine(C.Name);
-            //    Console.WriteLine("-----");
-            //    foreach (Item item in C.Inventory)
-            //    {
-            //        Console.WriteLine(item.Name);
-
-            //    }
-            //    Console.WriteLine();
-            //}
-
-            // int width = 20;
-            // int lenght = 50;
-            //Console.WriteLine("City======================================================================================================");
-            // for (int s = 0; s < 20; s++)
-            // {
-
-            //     Console.WriteLine("X                                                                                                        X");
-            //     //for (int x = 0; x < 50; x++)
-            //     //{
-
-
-            //     //}
-
-            // }Console.WriteLine("Status====================================================================================================");
-
-
-
-
-
-
         }
     }
 }

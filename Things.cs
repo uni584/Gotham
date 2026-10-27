@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Gotham
+﻿namespace Gotham
 {
-    internal class Things
+    public class Things
     {
         public string Name { get; set; }
 
