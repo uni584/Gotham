@@ -21,30 +21,31 @@
 
             Console.WriteLine();
             Console.WriteLine();
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
 
-            City city = new City(10, 5, 10, 20, 3);
+            City city = new City(100, 25, 20, 300, 10);
+            StatusFeed statusfeed = new StatusFeed(5, 60, "");
+            NewsFeed newsfeed = new NewsFeed(5, 55, "");
 
-            StatusFeed statusfeed = new StatusFeed(10, 90, "");
-
-            NewsFeed newsfeed = new NewsFeed(10, 90, "");
+            Console.Clear();
 
             while (true)
             {
                 city.Update();
 
-                Console.Clear();
-
                 city.Show();
                 city.Prison.Show();
                 city.PoorHouse.Show();
+
+                Console.SetCursorPosition(0, city.Height + 3);
+                city.ShowStatus();
+                statusfeed.show();
+
+                Console.SetCursorPosition(0, city.Height + 10);
+                newsfeed.Show();
                 city.ShowStatus();
 
-
-                //statusfeed.show();
-                //newsfeed.Show();
-
-                Thread.Sleep(750); // Delay for 1 second
+                Thread.Sleep(500);
             }
         }
     }

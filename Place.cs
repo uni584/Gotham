@@ -5,13 +5,20 @@
         public string Name { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
+
+        public int X { get; set; }
+        public int Y { get; set; }
+
         public List<Person> People { get; set; }
 
-        public Place(string name, int width, int height)
+        public Place(string name, int height, int width, int x, int y)
         {
             Name = name;
-            Width = width;
             Height = height;
+            Width = width;
+            X = x;
+            Y = y;
+
             People = new List<Person>();
         }
 
@@ -24,50 +31,46 @@
         {
             People.Remove(person);
         }
-
         public void Show()
         {
-            char[,] grid = new char[Height, Width];
-
-            for (int y = 0; y < Height; y++)
-            {
-                for (int x = 0; x < Width; x++)
-                {
-                    grid[y, x] = ' ';
-                }
-            }
-
-            foreach (Person person in People)
-            {
-                if (person.X >= 0 && person.X < Width &&
-                    person.Y >= 0 && person.Y < Height)
-                {
-                    grid[person.Y, person.X] = person.Icon;
-                }
-            }
-
             Console.ResetColor();
-            Console.WriteLine(Name + " " + new string('=', Width));
 
-            for (int y = 0; y < Height; y++)
+            Console.SetCursorPosition(X, Y);
+            Console.WriteLine(Name + " " +
+                new string('=', Math.Max(0, Width - Name.Length)));
+
+            for (int i = 0; i < Height; i++)
             {
+                Console.SetCursorPosition(X, Y + i + 1);
+
                 Console.Write("|");
 
-                for (int x = 0; x < Width; x++)
+                for (int j = 0; j < Width; j++)
                 {
-                    char symbol = grid[y, x];
+                    char symbol = '.';
+
+                    foreach (Person person in People)
+                    {
+                        if (person.X == j && person.Y == i)
+                        {
+                            symbol = person.Icon;
+                        }
+                    }
 
                     switch (symbol)
                     {
                         case 'C':
                             Console.ForegroundColor = ConsoleColor.Green;
                             break;
+
                         case 'P':
                             Console.ForegroundColor = ConsoleColor.Blue;
                             break;
+
                         case 'T':
                             Console.ForegroundColor = ConsoleColor.Red;
                             break;
+
                         default:
                             Console.ResetColor();
                             break;
@@ -77,11 +80,11 @@
                     Console.ResetColor();
                 }
 
-                Console.WriteLine("|");
+                Console.Write("|");
             }
 
+            Console.SetCursorPosition(X, Y + Height + 1);
             Console.WriteLine(new string('=', Width + 2));
-            Console.WriteLine($"People: {People.Count}");
         }
     }
 }

@@ -9,39 +9,31 @@
         public Prison Prison { get; set; }
         public PoorHouse PoorHouse { get; set; }
 
-        public City(int width, int hight, int citizen, int police, int thief)
-            : base("Gotham City", width, hight)
+        public City(int width, int height, int citizen, int police, int thief)
+            : base("Gotham City", height, width, 0, 0)
         {
-            Prison = new Prison(20, 5);
-            PoorHouse = new PoorHouse(20, 5);
+            Prison = new Prison(5, 20, width + 3, 0);
+            PoorHouse = new PoorHouse(5, 20, width + 3, 8);
 
             for (int i = 0; i < citizen; i++)
             {
                 People.Add(new Citizen(
                     Random.Shared.Next(width),
-                    Random.Shared.Next(hight)));
+                    Random.Shared.Next(height)));
             }
 
             for (int i = 0; i < thief; i++)
             {
                 People.Add(new Thief(
                     Random.Shared.Next(width),
-                    Random.Shared.Next(hight)));
+                    Random.Shared.Next(height)));
             }
 
             for (int i = 0; i < police; i++)
             {
                 People.Add(new Police(
                     Random.Shared.Next(width),
-                    Random.Shared.Next(hight)));
-            }
-        }
-
-        public void MovePeople()
-        {
-            foreach (Person person in People)
-            {
-                person.Move(Width, Height);
+                    Random.Shared.Next(height)));
             }
         }
 
@@ -72,25 +64,19 @@
                         {
                             if (citizen.Inventory.items.Count > 0)
                             {
-                                var stolenItem = citizen.Inventory.items[0];
-
-                                citizen.Inventory.items.Remove(stolenItem);
-                                //thief.Inventory.items.Add(stolenItem);
-                                if (stolenItem != null)
-                                {
-                                    continue;
-                                }
+                                thief.Steal(citizen);
                                 RobberiesCount++;
                                 StolenThingsCount++;
+
                             }
                         }
                         else if (person is Police police &&
                                  otherPerson is Thief caughtThief)
                         {
-                            //person.Arrest(caughtThief);
+                            Prison.ArrestThief(caughtThief);
                             ArrestedThievesCount++;
                             People.Remove(caughtThief);
-                            Prison.AddPerson(caughtThief);
+                            //Prison.AddPerson(caughtThief);
                         }
                     }
                 }
