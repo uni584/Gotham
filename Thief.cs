@@ -22,5 +22,10 @@
                 citizen.Inventory.items.Remove(item);
             }
         }
+
+        public void StolenItems()
+        {
+
+        }
     }
 }

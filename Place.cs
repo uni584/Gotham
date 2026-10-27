@@ -1,4 +1,7 @@
-﻿namespace Gotham
+﻿using System.Diagnostics.Contracts;
+using System.Runtime.InteropServices;
+
+namespace Gotham
 {
     public class Place
     {

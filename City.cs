@@ -44,7 +44,10 @@
                 person.Move(Width, Height);
             }
             CheckMeeting();
+
         }
+
+        
 
         public void CheckMeeting()
         {
