@@ -71,6 +71,12 @@
                                 RobberiesCount++;
                                 StolenThingsCount++;
 
+                                if (citizen.Inventory.items.Count == 0)
+                                {
+                                    PoorHouse.AcceptCitizen(citizen);
+                                    People.Remove(citizen);
+                                }
+
                             }
                         }
                         else if (person is Police police &&

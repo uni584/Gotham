@@ -23,7 +23,7 @@
             Console.WriteLine();
             Thread.Sleep(2000);
 
-            City city = new City(100, 25, 20, 300, 10);
+            City city = new City(100, 25, 50, 50, 50);
             StatusFeed statusfeed = new StatusFeed(5, 60, "");
             NewsFeed newsfeed = new NewsFeed(5, 55, "");
 
