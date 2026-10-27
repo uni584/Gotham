@@ -18,7 +18,7 @@ namespace Gotham
            
     }
 
-
+    //change show method to show all händelse step by step 
 
     class StatusFeed : Feeds
     {
