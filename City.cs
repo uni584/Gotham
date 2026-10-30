@@ -73,15 +73,20 @@
                                 RobberiesCount++;
                                 StolenThingsCount++;
 
+                                int lastItemIndex = thief.Inventory.items.Count - 1;
+                                Things stolenItem = thief.Inventory.items[lastItemIndex];
+
                                 if (citizen.Inventory.items.Count == 0)
                                 {
                                     PoorHouse.AcceptCitizen(citizen);
                                     People.Remove(citizen);
                                 }
 
-                                AddNews($" Tjuven ({thief.Name}, rånar {citizen.Name}).");
-
+                                AddNews($" Tjuven {thief.Name}, rånar medborgare {citizen.Name} och tar {stolenItem.Name}.");
+                              
                             }
+
+
                         }
                         else if (person is Police police &&
                                  otherPerson is Thief caughtThief)
@@ -92,6 +97,15 @@
                             //Prison.AddPerson(caughtThief);
                         }
                     }
+
+
+                    if (person is Citizen greetCitizen && otherPerson is Police greetPolice && greetCitizen.X==greetPolice.X && greetCitizen.Y==greetPolice.Y)
+                    {
+                        AddNews($"{greetCitizen.Name} och polisen {greetPolice.Name} träffas på gatan och hälsar artigt");
+                    }
+                       
+                    
+
                 }
             }
         }

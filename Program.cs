@@ -25,7 +25,7 @@
 
             City city = new City(100, 25, 50, 50, 50);
             StatusFeed statusfeed = new StatusFeed(5, 60, "");
-            NewsFeed newsfeed = new NewsFeed(5, 55, "");
+            NewsFeed newsfeed = new NewsFeed(5, city.Width, city.News);
 
             Console.Clear();
 
@@ -42,7 +42,7 @@
                 statusfeed.show();
 
                 Console.SetCursorPosition(0, city.Height + 10);
-                newsfeed.Show();
+                newsfeed.Show(0, city.Height + 10);
                 city.ShowStatus();
 
                 AddNew.Input(city,100,25);
