@@ -24,15 +24,15 @@ namespace Gotham
             {
                 case ConsoleKey.P:
                     city.People.Add(new Police(x, y));
-                    //feeds.Add("En ny polis har flyttat in i staden!")
+                    city.AddNews("En ny polis har flyttat in i staden!");
                     break;
                 case ConsoleKey.T:
                     city.People.Add(new Thief(x, y));
-                    //feeds.Add("En ny tjuv har flyttat in i staden!")
+                    city.AddNews("En ny tjuv har flyttat in i staden!");
                     break;
                 case ConsoleKey.C:
                     city.People.Add(new Citizen(x, y));
-                    //feeds.Add("En ny medborgare har flyttat in i staden!")
+                    city.AddNews("En ny medborgare har flyttat in i staden!");
                     break;
             }
         }
