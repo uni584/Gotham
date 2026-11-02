@@ -4,10 +4,10 @@
     {
         public int RobberiesCount { get; set; }
         public int StolenThingsCount { get; set; }
-        public int ReturnedThingsCount { get; set; }
         public int ArrestedThievesCount { get; set; }
         public Prison Prison { get; set; }
         public PoorHouse PoorHouse { get; set; }
+        public int ReleasedThievesCount { get; private set; }
 
         public List<string> News { get; set; } = new List<string>();
 
@@ -46,10 +46,9 @@
                 person.Move(Width, Height);
             }
             CheckMeeting();
-
+            ReleasePrisoners();
         }
 
-        
 
         public void CheckMeeting()
         {
@@ -60,62 +59,83 @@
                     if (!People.Contains(person) || !People.Contains(otherPerson))
                         continue;
 
-                    if (person != otherPerson &&
-                        person.X == otherPerson.X &&
-                        person.Y == otherPerson.Y)
+                    if (person == otherPerson ||
+                        person.X != otherPerson.X ||
+                        person.Y != otherPerson.Y)
+                        continue;
+
+                    // Thief meets Citizen
+                    if (person is Thief thief &&
+                        otherPerson is Citizen citizen)
                     {
-                        if (person is Thief thief &&
-                            otherPerson is Citizen citizen)
+                        Things? stolenItem = thief.Steal(citizen);
+
+                        if (stolenItem != null)
                         {
-                            if (citizen.Inventory.items.Count > 0)
+                            RobberiesCount++;
+                            StolenThingsCount++;
+
+                            if (citizen.Inventory.items.Count == 0)
                             {
-                                thief.Steal(citizen);
-                                RobberiesCount++;
-                                StolenThingsCount++;
-
-                                int lastItemIndex = thief.Inventory.items.Count - 1;
-                                Things stolenItem = thief.Inventory.items[lastItemIndex];
-
-                                if (citizen.Inventory.items.Count == 0)
-                                {
-                                    PoorHouse.AcceptCitizen(citizen);
-                                    People.Remove(citizen);
-                                }
-
-                                AddNews($" Tjuven {thief.Name}, rånar medborgare {citizen.Name} och tar {stolenItem.Name}.");
-                              
+                                People.Remove(citizen);
+                                PoorHouse.AcceptCitizen(citizen);
                             }
-
-
-                        }
-                        else if (person is Police police &&
-                                 otherPerson is Thief caughtThief)
-                        {
-                            Prison.ArrestThief(caughtThief);
-                            ArrestedThievesCount++;
-                            People.Remove(caughtThief);
-                            //Prison.AddPerson(caughtThief);
                         }
                     }
 
-
-                    if (person is Citizen greetCitizen && otherPerson is Police greetPolice && greetCitizen.X==greetPolice.X && greetCitizen.Y==greetPolice.Y)
+                    // Police meets Thief
+                    else if (person is Police police &&
+                             otherPerson is Thief caughtThief)
                     {
-                        AddNews($"{greetCitizen.Name} och polisen {greetPolice.Name} träffas på gatan och hälsar artigt");
-                    }
-                       
-                    
+                        int confiscated = police.ArrestThief(caughtThief);
 
+                        //ReturnedThingsCount += confiscated;
+                        ArrestedThievesCount++;
+
+                        caughtThief.ArrestTime = DateTime.Now;
+
+                        People.Remove(caughtThief);
+                        Prison.AddPrisoner(caughtThief);
+                    }
                 }
+            }
+        }
+
+        public void ReleasePrisoners()
+        {
+            List<Thief> releasedThieves = Prison.ReleaseThieves();
+
+            foreach (Thief thief in releasedThieves)
+            {
+                AddPerson(thief);
+
+                ReleasedThievesCount++;
             }
         }
 
         public void ShowStatus()
         {
-            Console.WriteLine($"Robberies: {RobberiesCount}");
-            Console.WriteLine($"Arrested Thieves: {ArrestedThievesCount}");
-            Console.WriteLine($"Stolen Things: {StolenThingsCount}");
-            Console.WriteLine($"Returned Things: {ReturnedThingsCount}");
+
+            Console.SetCursorPosition(2, 28);
+            Console.Write($"Robberies: {RobberiesCount}       ");
+
+            Console.SetCursorPosition(2, 29);
+            Console.Write($"Arrested Thieves: {ArrestedThievesCount}       ");
+
+            Console.SetCursorPosition(2, 30);
+            Console.Write($"Stolen Things: {StolenThingsCount}       ");
+
+            Console.SetCursorPosition(2, 31);
+            Console.Write($"Released Thieves: {ReleasedThievesCount}       ");
+
+            Console.SetCursorPosition(2, 32);
+            Console.Write($"Citizens: {People.Count(p => p is Citizen)}       ");
+
+            Console.SetCursorPosition(32, 28);
+            Console.Write($"Police: {People.Count(p => p is Police)}       ");
+
+            Console.SetCursorPosition(32, 29);
+            Console.Write($"Thieves: {People.Count(p => p is Thief)}       ");
         }
 
 
