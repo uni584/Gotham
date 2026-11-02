@@ -74,11 +74,13 @@
                         {
                             RobberiesCount++;
                             StolenThingsCount++;
+                            AddNews($" Tjuven {thief.Name}, rånar medborgare {citizen.Name} och tar {stolenItem.Name}.");
 
                             if (citizen.Inventory.items.Count == 0)
                             {
                                 People.Remove(citizen);
                                 PoorHouse.AcceptCitizen(citizen);
+                                AddNews($"citizen {citizen.Name} har blivit hemlös och skickas till fattighuset.");
                             }
                         }
                     }
@@ -91,11 +93,16 @@
 
                         //ReturnedThingsCount += confiscated;
                         ArrestedThievesCount++;
-
+                        AddNews($"Polisen {police.Name} har arresterat tjuven {caughtThief.Name} och konfiskerat {confiscated} stulna saker.");
                         caughtThief.ArrestTime = DateTime.Now;
 
                         People.Remove(caughtThief);
                         Prison.AddPrisoner(caughtThief);
+                        AddNews($"Tjuven {caughtThief.Name} har skickats till fängelset.");
+                    }
+                    else if (person is Citizen greetCitizen && otherPerson is Police greetPolice && greetCitizen.X == greetPolice.X && greetCitizen.Y == greetPolice.Y)
+                    {
+                        AddNews($"{greetCitizen.Name} och polisen {greetPolice.Name} träffas på gatan och hälsar artigt");
                     }
                 }
             }
@@ -110,6 +117,7 @@
                 AddPerson(thief);
 
                 ReleasedThievesCount++;
+                AddNews($"Tjuven {thief.Name} har släppts från fängelset och är nu fri att begå brott igen.");
             }
         }
 
