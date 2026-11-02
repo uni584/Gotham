@@ -9,6 +9,7 @@
         public int YDirections { get; set; }
         public string Name { get; set; }
 
+        public Inventory Inventory { get; set; } = new Inventory();
         private static Random random = new Random();
 
         public Person(int cityWidth, int cityHeight)
