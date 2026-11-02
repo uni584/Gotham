@@ -55,27 +55,51 @@ namespace Gotham
 
     class NewsFeed : Feeds 
     {
-        public string News { get; set; }
-        public NewsFeed(int height, int width, string news) : base(height, width)
+        public List<string> News { get; set; }
+        public NewsFeed(int height, int width, List<string> news) : base(height, width)
         {
             News = news; 
         }   
 
-        public void Show()
+        public void Show(int x, int y)
         {
 
-            int x = 40;
-            int y = 27;
+            //int x = 40;
+            //int y = 27;
 
             Console.SetCursorPosition(x, y);
             Console.Write("NewsFeed" + new string('=', Width - 6));
 
-            for (int i = 0; i < Height; i++)
+            for (int row = 0; row < Height; row++)
             {
-                Console.SetCursorPosition(x, y + i + 1);
+
+                int index = News.Count - 1 - row;
+                string text = "";
+
+                if (index>=0)
+                {
+                    text = News[index];
+                }
+                else if (News.Count == 0 && row == 0)
+                {
+                    text = "Inga nyheter";
+                }
+                Console.SetCursorPosition(x, y + row + 1);
 
                 Console.Write("|");
-                Console.Write(new string(' ', Width));
+
+                for (int column = 0; column < Width; column++)
+                {
+                    if(column < text.Length)
+                    {
+                        Console.Write(text[column]);
+                    }
+                    else
+                    {
+                        Console.Write(" ");
+                    }
+                }
+                //Console.Write(new string(' ', Width));
                 Console.Write("|");
             }
 
