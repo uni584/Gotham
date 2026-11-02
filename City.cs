@@ -69,7 +69,7 @@
                             {
                                 thief.Steal(citizen);
                                 RobberiesCount++;
-                                StolenThingsCount++;
+                                StolenThingsCount++;                               
 
                                 if (citizen.Inventory.items.Count == 0)
                                 {

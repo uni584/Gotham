@@ -51,7 +51,7 @@ namespace Gotham
 
                 for (int j = 0; j < Width; j++)
                 {
-                    char symbol = '.';
+                    char symbol = ' ';
 
                     foreach (Person person in People)
                     {
