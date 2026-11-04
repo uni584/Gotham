@@ -91,6 +91,21 @@
                     {
                         int confiscated = police.ArrestThief(caughtThief);
 
+                        if (confiscated >= 4)
+                        {
+                            caughtThief.PrisonTime = 6;
+                        }
+                        else if (confiscated >= 2)
+                        {
+                            caughtThief.PrisonTime = 4;
+                        }
+                        else
+                        {
+                            caughtThief.PrisonTime = 3;
+                        }
+
+                        caughtThief.ArrestTime = DateTime.Now;
+
                         //ReturnedThingsCount += confiscated;
                         ArrestedThievesCount++;
                         AddNews($"Polisen {police.Name} har arresterat tjuven {caughtThief.Name} och konfiskerat {confiscated} stulna saker.");
@@ -117,7 +132,7 @@
                 AddPerson(thief);
 
                 ReleasedThievesCount++;
-                AddNews($"Tjuven {thief.Name} har släppts från fängelset och är nu fri att begå brott igen.");
+                AddNews($"Tjuven {thief.Name} har släppts från fängelset after {thief.PrisonTime} sekunder och är nu fri att begå brott igen.");
             }
         }
 
