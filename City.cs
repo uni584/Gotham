@@ -74,7 +74,7 @@
                         {
                             RobberiesCount++;
                             StolenThingsCount++;
-                            AddNews($" Tjuven {thief.Name}, rånar medborgare {citizen.Name} och tar {stolenItem.Name}.");
+                            AddNews($"Tjuven {thief.Name}, rånar medborgare {citizen.Name} och tar {stolenItem.Name}.");
 
                             if (citizen.Inventory.items.Count == 0)
                             {
@@ -86,9 +86,14 @@
                     }
 
                     else if (person is Police police &&
-                    otherPerson is Thief caughtThief && 
-                    caughtThief.Inventory.items.Count > 0)
+                    otherPerson is Thief caughtThief)
                     {
+                        if(caughtThief.Inventory.items.Count == 0)
+                        {
+                            AddNews($"Polisen {police.Name} träffade tjuven {caughtThief.Name}, men kunde inte arrestera honom eftersom han inte stulit något.");
+                            continue;
+                        }
+                        
                         int confiscated = police.ArrestThief(caughtThief);
 
                         caughtThief.PrisonTime = confiscated * 10;
@@ -141,13 +146,13 @@
             Console.SetCursorPosition(2, 31);
             Console.Write($"Released Thieves: {ReleasedThievesCount}       ");
 
-            Console.SetCursorPosition(2, 32);
+            Console.SetCursorPosition(32, 28);
             Console.Write($"Citizens: {People.Count(p => p is Citizen)}       ");
 
-            Console.SetCursorPosition(32, 28);
+            Console.SetCursorPosition(32, 29);
             Console.Write($"Police: {People.Count(p => p is Police)}       ");
 
-            Console.SetCursorPosition(32, 29);
+            Console.SetCursorPosition(32, 30);
             Console.Write($"Thieves: {People.Count(p => p is Thief)}       ");
         }
 
