@@ -23,7 +23,7 @@
             {
                 if (person is Thief thief &&
                     thief.ArrestTime != null &&
-                    (DateTime.Now - thief.ArrestTime.Value).TotalSeconds >= 3)
+                    (DateTime.Now - thief.ArrestTime.Value).TotalSeconds >= 20)
                 {
                     RemovePerson(thief);
 
