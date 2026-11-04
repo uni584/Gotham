@@ -2,6 +2,7 @@
 {
     public class Thief : Person
     {
+
         public DateTime? ArrestTime { get; set; }
         public Thief(int x, int y) : base(x, y)
         {

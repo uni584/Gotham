@@ -33,6 +33,9 @@
             {
                 city.Update();
 
+                city.Prison.MovePeople();
+                city.PoorHouse.MovePeople();
+
                 city.Show();
                 city.Prison.Show();
                 city.PoorHouse.Show();

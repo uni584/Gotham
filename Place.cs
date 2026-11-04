@@ -31,6 +31,14 @@ namespace Gotham
             People.Add(person);
         }
 
+        public void MovePeople()
+        {
+            foreach (Person person in People)
+            {
+                person.Move(Width, Height);
+            }
+        }
+
         public void RemovePerson(Person person)
         {
             People.Remove(person);
