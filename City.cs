@@ -85,11 +85,29 @@
                         }
                     }
 
-                    // Police meets Thief
                     else if (person is Police police &&
-                             otherPerson is Thief caughtThief)
+         otherPerson is Thief caughtThief)
                     {
                         int confiscated = police.ArrestThief(caughtThief);
+
+                        if (confiscated >= 4)
+                        {
+                            caughtThief.PrisonTime = 40;
+                        }
+                        else if (confiscated >= 3)
+                        {
+                            caughtThief.PrisonTime = 30;
+                        }
+                        else if (confiscated >= 2)
+                        {
+                            caughtThief.PrisonTime = 20;
+                        }
+                        else
+                        {
+                            caughtThief.PrisonTime = 10;
+                        }
+
+                        caughtThief.ArrestTime = DateTime.Now;
 
                         //ReturnedThingsCount += confiscated;
                         ArrestedThievesCount++;
@@ -104,6 +122,7 @@
                     {
                         AddNews($"{greetCitizen.Name} och polisen {greetPolice.Name} träffas på gatan och hälsar artigt");
                     }
+
                 }
             }
         }
